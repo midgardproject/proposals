@@ -30,16 +30,16 @@ A. Core
 1. Switch from mgdschema to RDF-schema compatible ontologies.
 -------------------------------------------------------------
 
-Internal representation of ontologies in Midgard3 will be stored in pre-parsed way in database, and we will need to provide tools to import/export standard RDF-Schema and/or OWL representations such as Manchester Syntax and RDF/Turtle.
+Internal representation of ontologies in Midgard3 will be stored in pre-parsed way in database, and we will need to provide tools to import/export standard [RDF-Schema](http://en.wikipedia.org/wiki/RDF_Schema) and/or [OWL](http://en.wikipedia.org/wiki/Web_Ontology_Language) representations such as [Manchester Syntax](http://www.w3.org/2007/OWL/wiki/ManchesterSyntax) and RDF/[Turtle](http://en.wikipedia.org/wiki/Turtle_(syntax)).
 
 Strictly speaking, we don't need to support the whole RDF-Schema or OWL on the core-level from the start. We need to support some basic subset, which will define relationships between objects.
 
 Definitions of basic data-types and basic relationships can be implicitly provided by the system:
 
 * RDF, RDFs, XSD
-* Dublin Core (instead of current midgard_metadata)
-* FOAF
-* ontologies supported by Google's Rich Snippets (to work the SEO angle of why semantics are useful)
+* [Dublin Core](http://dcmi.kc.tsukuba.ac.jp/dcregistry/navigateServlet) (instead of current midgard_metadata)
+* [FOAF](http://xmlns.com/foaf/spec/)
+* ontologies supported by [Google's Rich Snippets](http://www.google.com/support/webmasters/bin/answer.py?hl=en&answer=99170) (to work the SEO angle of why semantics are useful)
 
 Support for importing-exporting full schemas should be implemented on application-level
 
@@ -175,7 +175,7 @@ For object-properties we don't have namespacing facilities in most of the langua
 
 Probably we should support several ways at the same time.
 
-In "Hormiga" project they use a "user-provided mapping table" approach. They have a "mapping file" where you make the connection between namespaced properties and unnamespaced properties. But obviously this would be quite a burden to maintain alongside the actual ontology, if that is the only option.
+In "[Hormiga](http://blogs.gnome.org/abustany/2010/07/05/hormiga-quick-followup/)" project they use a "user-provided mapping table" approach. They have a "mapping file" where you make the connection between namespaced properties and unnamespaced properties. But obviously this would be quite a burden to maintain alongside the actual ontology, if that is the only option.
 
     {
         "Class": "nmm:Photo",
@@ -232,12 +232,12 @@ B. Midgard CMS
 1. Midgard's CMS user interface must support creating semantically enhanced information
 ---------------------------------------------------------------------------------------
 
-Primary content format handled with Midgard CMS is HTML5. With HTML5 you can include semantic information into the mark-up using RDFa. The IKS project is working on a semantic rich text editor that we will be able to use as the content editing interface. When content is stored Midgard should analyze the RDFa content and store it to corresponding Midgard store.
+Primary content format handled with Midgard CMS is HTML5. With HTML5 you can include semantic information into the mark-up using RDFa. The IKS project is working on a [semantic rich text editor](http://wiki.iks-project.eu/index.php/Semantic_Editor) that we will be able to use as the content editing interface. When content is stored Midgard should analyze the RDFa content and store it to corresponding Midgard store.
 
 RDFa will also be used for marking up content displayed via templates in Midgard CMS. The RDFa information can be used by the editing interface to determine where edited content ought to be stored and how.
 
 
 2. Midgard CMS must be able to connect to semantic engines that can enrich content
-----------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-The IKS project supplies FISE, a semantic engine that can accept raw textual content, recognize entities (companies, places, etc) in it and return corresponding RDF.
+The IKS project supplies [FISE](http://fise.demo.nuxeo.com/), a semantic engine that can accept raw textual content, recognize entities (companies, places, etc) in it and return corresponding RDF.
