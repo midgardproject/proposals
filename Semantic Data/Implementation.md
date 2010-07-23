@@ -1,25 +1,3 @@
-Fundamentals
-============
-
-What is the main approach and big picture of this spec?
--------------------------------------------------------
-* Are we going to create new project - Midgard TripleStore?
-* Are we going to replace Midgard Content Repository with Midgard TripleStore?
-
-If, we are going to create Midgard TripleStore:
------------------------------------------------
-* Do we need to build this on top of GDA, instead of other library?
-* Is GDA proper library to build TripleStore on top of it?
-* Do we want to compete with Tracker?
-* Which part of Midgard has to be untouched and which one has to be rewritten from scratch? (basically it is somehow related to bacwakrd compatibility)
-
-If, we are going to continue Midgard Content Repository:
---------------------------------------------------------
-* Do we need to build ontologies for everything which is not efficient for content repository?
-
-Is this a spec for next Midgard generation or for next Midgard release?
------------------------------------------------------------------------
-
 RDF Namespaces registry
 =======================
 
