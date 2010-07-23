@@ -143,10 +143,13 @@ Theoretically, data of the single class can be divided even between several tabl
 
 > **A:** This is not a normal operation. It is intended for administrator and he is supposed to know implications. Transaction is required, because it is a large data-move operation and we absolutely need consistency here.
 
+> **comment(piotras):** If any of such critical operation must be done by administrator which has particular tool/ui/whatever, such tool should explicitly start and commit transaction. 
+
 > **Q:** (piotras) Dividing class data between tables is even worse idea (this is practical point of view after using this approach in Midgard for years).
 
 > **A:** Well, I am ok with not allowing this. Just thought that in some edge-cases it might be useful 
 
+> **comment(piotras):** With jval we recently tested such operation with multilang in Ragnaroek. Join for class tables decreased performance ~20x.
 
 Storage
 -------
@@ -205,6 +208,7 @@ This should be implemented any way, as:
 
 > **A:** Sure, we can. I just didn't think this will affect performance that badly. Hash-lookup is usually ultra-fast. Anyway, things that you propose probably belong to "RDF Namespaces registry" section of this document.
 
+> **comment(piotras):** It's not about hash lookup, becaue this is what is done on any bindings level. In core we have to implement property handlers from scratch. Keeping in mind stability of such implementation, reindexing properties (not db indices), prepared statements regeneration, db to property maps regeneration, etc. RDF Napmespaces registry section is highly related to properties if we want to provide common programming interface for other developers. 
 
 2. Heuristics
 -------------
