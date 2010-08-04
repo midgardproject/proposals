@@ -10,9 +10,9 @@ namespace Midgard {
 
 		/* methods */
 		public abstract bool exists ();
-		public abstract void create () throws StorageError;
-		public abstract void update () throws StorageError; 
-		public abstract void remove () throws StorageError;
+		public abstract void create () throws StorageManagerError;
+		public abstract void update () throws StorageManagerError; 
+		public abstract void remove () throws StorageManagerError;
 	}
 
 	errordomain StorageManagerTypePropertyError {
@@ -29,15 +29,15 @@ namespace Midgard {
 		/* method */
 		public abstract void set_typename (string type);
 		public abstract string get_typename ();
-		public abstract void set_gtype (GLib.Type);
-		public abstract GLib.Type get_gtype (GLib.Type);
+		public abstract void set_gtype (GLib.Type type);
+		public abstract GLib.Type get_gtype ();
 		public abstract bool is_valid () throws StorageManagerTypePropertyError;
 		public abstract void set_default_value (GLib.Value val);
 		public abstract GLib.Value get_default_value ();
 		public abstract bool has_default_value ();
 	}	
 
-	errordomain StorageManagerTypePropertyError {
+	errordomain StorageManagerTypeError {
 		NOT_EXIST
 	}
 
@@ -48,5 +48,7 @@ namespace Midgard {
 
 		/* methods */
 		public abstract StorageManagerTypeProperty get_property_storage_manager (string name);
+		public abstract string[]? list_property_names ();
+		public abstract StorageManagerTypeProperty[]? list_properties();
 	}
 }
