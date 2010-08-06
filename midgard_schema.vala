@@ -2,14 +2,14 @@ using GLib;
 
 namespace Midgard {
 
-	errordomain SchemaTypePropertyError {
+	errordomain SchemaManagerTypePropertyError {
 		NAME_INVALID,
 		TYPE_INVALID,
 		VALUE_INVALID,
 		REFERENCE_INVALID
 	}
 
-	public interface SchemaTypeProperty : GLib.Object {
+	public interface SchemaManagerTypeProperty : GLib.Object {
 
 		/* properties */
 		public abstract string name { get; construct; }
@@ -26,13 +26,14 @@ namespace Midgard {
 		public abstract void set_reference (SchemaType type, SchemaProperty property) throws SchemaTypeProperty;
 	}
 
-	errordomain SchemaTypeError {
+	errordomain SchemaManagerTypeError {
 		NAME_EXISTS,
 		NAME_INVALID,
-		PROPERTY_EXISTS
+		PROPERTY_EXISTS,
+		STORAGE_INVALID
 	}
 
-	public interface SchemaType : GLib.Object {
+	public interface SchemaManagerType : GLib.Object {
 
 		/* properties */
 		public abstract string name { get; construct;}	
@@ -41,6 +42,7 @@ namespace Midgard {
 		public abstract bool property_exists (SchemaTypeProperty property);
 		public abstract void property_add (SchemaTypeProperty property) throws SchemaTypeError;
 		public abstract void register () throws SchemaTypeError;
+		public abstract void set_storage_manager (StorageManager manager) throws SchemaTypeError;
 	}
 
 	errordomain SchemaStorageError {
