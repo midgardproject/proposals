@@ -24,6 +24,7 @@ namespace Midgard {
 		public abstract void set_private();
 		public abstract void set_description (string description);
 		public abstract void set_reference (SchemaType type, SchemaProperty property) throws SchemaTypeProperty;
+		public abstract bool set_namespace (string name);
 	}
 
 	errordomain SchemaManagerTypeError {
