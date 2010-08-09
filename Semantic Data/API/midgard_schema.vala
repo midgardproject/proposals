@@ -2,14 +2,14 @@ using GLib;
 
 namespace Midgard {
 
-	errordomain SchemaManagerTypePropertyError {
+	errordomain SchemaTypePropertyError {
 		NAME_INVALID,
 		TYPE_INVALID,
 		VALUE_INVALID,
 		REFERENCE_INVALID
 	}
 
-	public interface SchemaManagerTypeProperty : GLib.Object {
+	public interface SchemaTypeProperty : GLib.Object {
 
 		/* properties */
 		public abstract string name { get; construct; }
@@ -28,14 +28,14 @@ namespace Midgard {
 		public abstract string get_namespace ();
 	}
 
-	errordomain SchemaManagerTypeError {
+	errordomain SchemaTypeError {
 		NAME_EXISTS,
 		NAME_INVALID,
 		PROPERTY_EXISTS,
 		STORAGE_INVALID
 	}
 
-	public interface SchemaManagerType : GLib.Object {
+	public interface SchemaType : GLib.Object {
 
 		/* properties */
 		public abstract string name { get; construct;}	
@@ -43,24 +43,21 @@ namespace Midgard {
 		/* methods */
 		public abstract bool property_exists (SchemaTypeProperty property);
 		public abstract void property_add (SchemaTypeProperty property) throws SchemaTypeError;
-		public abstract void register () throws SchemaTypeError;
-		public abstract void set_storage_manager (StorageManager manager) throws SchemaTypeError;
+		public abstract void set_storage_mapper (StorageMapper mapper) throws SchemaTypeError;
+
 	}
 
-	errordomain SchemaStorageError {
+	errordomain SchemaError {
 		TYPE_EXISTS,
+		TYPE_INVALID,
 		INTERNAL
 	}
 
-	public interface SchemaStorage : GLib.Object {
-
-		/* properties */
-		public abstract SchemaType schematype { get; construct; }
+	public interface Schema : GLib.Object {
 
 		/* methods */
-		public abstract bool exists ();
-		public abstract void create () throws SchemaStorageError;
-		public abstract void update () throws SchemaStorageError; 
-		public abstract void remove () throws SchemaStorageError;
+		public abstract void register_type (SchemaType type) throws SchemaTypeError;
+		public abstract Object? factory (Connection mgd, string classname) throws SchemaTypeError;
+		public abstract Schematype? get_schema_type (string classname); 
 	}
 }

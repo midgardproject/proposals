@@ -3,6 +3,10 @@ using GLib;
 namespace Midgard {
 
 	errordomain StorageManagerError {
+		OBJECT_INVALID,
+		OBJECT_DUPLICATE,
+		PATH_RELATIVE,
+		PATH_INVALID,
 		INTERNAL
 	}
 
@@ -10,17 +14,21 @@ namespace Midgard {
 
 		/* methods */
 		public abstract bool exists ();
-		public abstract void create () throws StorageManagerError;
-		public abstract void update () throws StorageManagerError; 
-		public abstract void remove () throws StorageManagerError;
+		public abstract bool create () throws StorageManagerError;
+		public abstract bool update () throws StorageManagerError;
+		public abstract bool save () throws StorageManagerError; 
+		public abstract bool remove () throws StorageManagerError;
+		public abstract bool purge () throws StorageManagerError;
+		public abstract Object? get_by_path (string path) throws StoragemanagerError;
+		public abstract string? get_path ();
 	}
 
-	errordomain StorageManagerTypePropertyError {
+	errordomain StorageMapperTypePropertyError {
 		TYPE_INVALID
 	}
 
-	public interface StorageManagerTypeProperty : GLib.Object {
-
+	public interface StorageMapperTypeProperty : GLib.Object {
+	
 		/* properties */
 		public abstract string name { get; construct; }
 		public abstract bool index { get; set; }
@@ -37,17 +45,17 @@ namespace Midgard {
 		public abstract bool has_default_value ();
 	}	
 
-	errordomain StorageManagerTypeError {
+	errordomain StorageMapperTypeError {
 		NOT_EXIST
 	}
 
-	public interface StorageManagerType : GLib.Object {
+	public interface StorageMapperType : GLib.Object {
 		
 		/* properties */
 		public abstract string name { get; construct; }
 
 		/* methods */
-		public abstract StorageManagerTypeProperty get_property_storage_manager (string name);
+		public abstract StorageManagerTypeProperty get_property_manager (string name);
 		public abstract string[]? list_property_names ();
 		public abstract StorageManagerTypeProperty[]? list_properties();
 	}
