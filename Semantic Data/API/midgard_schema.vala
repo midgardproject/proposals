@@ -43,6 +43,7 @@ namespace Midgard {
 		/* methods */
 		public abstract bool property_exists (SchemaTypeProperty property);
 		public abstract void property_add (SchemaTypeProperty property) throws SchemaTypeError;
+		public abstract SchemaTypeProperty? get_property (string name); 
 		public abstract void set_storage_mapper (StorageMapper mapper) throws SchemaTypeError;
 
 	}
@@ -56,8 +57,9 @@ namespace Midgard {
 	public interface Schema : GLib.Object {
 
 		/* methods */
-		public abstract void register_type (SchemaType type) throws SchemaTypeError;
-		public abstract Object? factory (Connection mgd, string classname) throws SchemaTypeError;
+		public abstract void register_type (SchemaType type, SchemaType parent) throws SchemaError;
+		public abstract void register_available_types () throws SchemaError;
+		public abstract Object? factory (Connection mgd, string classname) throws SchemaError;
 		public abstract Schematype? get_schema_type (string classname); 
 	}
 }
