@@ -13,14 +13,14 @@ namespace Midgard {
 	public interface StorageManager : GLib.Object {
 
 		/* methods */
-		public abstract bool exists ();
-		public abstract bool create () throws StorageManagerError;
-		public abstract bool update () throws StorageManagerError;
-		public abstract bool save () throws StorageManagerError; 
-		public abstract bool remove () throws StorageManagerError;
-		public abstract bool purge () throws StorageManagerError;
-		public abstract Object? get_by_path (string path) throws StoragemanagerError;
-		public abstract string? get_path ();
+		public abstract bool exists (Storable object);
+		public abstract bool create (Storable object) throws StorageManagerError;
+		public abstract bool update (Storable object) throws StorageManagerError;
+		public abstract bool save (Storable object) throws StorageManagerError; 
+		public abstract bool remove (Storable object) throws StorageManagerError;
+		public abstract bool purge (Storable object) throws StorageManagerError;
+		public abstract Storable? get_by_path (string path) throws StoragemanagerError;
+		public abstract string? get_path (Storable);
 	}
 
 	errordomain StorageMapperTypePropertyError {
@@ -55,7 +55,7 @@ namespace Midgard {
 		public abstract string name { get; construct; }
 
 		/* methods */
-		public abstract StorageManagerTypeProperty get_property_manager (string name);
+		public abstract StorageMapperTypeProperty get_property_mapper (string name);
 		public abstract string[]? list_property_names ();
 		public abstract StorageManagerTypeProperty[]? list_properties();
 	}
