@@ -15,12 +15,12 @@ namespace Midgard {
 		public abstract string name { get; construct; }
 
 		/* methods */
-		public abstract void set_typename (string type) throws SchemaTypePropertyError;
-		public abstract string get_typename	();
-		public abstract void set_gtype (GLib.Type type) throws SchemaTypePropertyError;
-		public abstract GLib.Type get_gtype (GLib.Type type);
-		public abstract void set_default_value (GLib.Value) throws SchemaTypePropertyError;
-		public abstract GLib.Value get_default_value ();
+		public abstract void set_value_typename (string type) throws SchemaTypePropertyError;
+		public abstract string get_value_typename	();
+		public abstract void set_value_gtype (GLib.Type type) throws SchemaTypePropertyError;
+		public abstract GLib.Type get_value_gtype (GLib.Type type);
+		public abstract void set_value_default (GLib.Value) throws SchemaTypePropertyError;
+		public abstract GLib.Value get_value_default ();
 		public abstract void set_private();
 		public abstract void set_description (string description);
 		public abstract void set_reference (SchemaType type, SchemaProperty property) throws SchemaTypeProperty;
