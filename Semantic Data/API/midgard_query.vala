@@ -78,7 +78,12 @@ public class QuerySelectRaw : QueryExecutor
                 WHERE
                     `t1`.`name` = 'hasClass' AND `t1`.`value` = class;
             */
-            constraint = new QueryConstraint
+            constraint = new QueryConstraintGroup(
+                "AND",
+                new QueryConstraint(new QueryProperty("name", base_storage),  "=", QueryValue.create_with_value("hasClass"), base_storage),
+                new QueryConstraint(new QueryProperty("value", base_storage), "=", QueryValue.create_with_value(base_class), base_storage)
+            );
+            query.set_constraint(constraint);
         }
     }
 
