@@ -35,14 +35,14 @@ namespace Midgard {
 		public abstract bool is_pk { get; set; }
 
 		/* method */
-		public abstract void set_typename (string type);
-		public abstract string get_typename ();
-		public abstract void set_gtype (GLib.Type type);
-		public abstract GLib.Type get_gtype ();
+		public abstract void value_set_typename (string type);
+		public abstract string value_get_typename ();
+		public abstract void value_set_gtype (GLib.Type type);
+		public abstract GLib.Type value_get_gtype ();
 		public abstract bool is_valid () throws StorageManagerTypePropertyError;
-		public abstract void set_default_value (GLib.Value val);
-		public abstract GLib.Value get_default_value ();
-		public abstract bool has_default_value ();
+		public abstract void value_set_default (GLib.Value val);
+		public abstract GLib.Value value_get_default ();
+		public abstract bool value_has_default ();
 	}	
 
 	errordomain StorageMapperTypeError {
