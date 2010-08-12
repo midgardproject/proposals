@@ -21,17 +21,24 @@ namespace Midgard {
 
 		public abstract Config config { get; construct; }
 
-		/* methods */
+		/* connection methods */
 		public abstract bool open () throws FIXME ;
 		public abstract void close ();
 		public abstract StorageManager fork ();
 		public abstract Storagemanager clone ();
+
+		/* per object methods */
 		public abstract bool exists (Storable object);
 		public abstract bool create (Storable object) throws StorageManagerError;
 		public abstract bool update (Storable object) throws StorageManagerError;
 		public abstract bool save (Storable object) throws StorageManagerError; 
 		public abstract bool remove (Storable object) throws StorageManagerError;
 		public abstract bool purge (Storable object) throws StorageManagerError;
+
+		/* per class methods */
+		public abstract bool create_storage (string classname);
+		public abstract bool update_storage (string classname);
+		public abstract bool remove_storage (string classname);
 	}
 
 	errordomain StorageMapperTypePropertyError {
