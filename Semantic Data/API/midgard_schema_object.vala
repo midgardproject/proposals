@@ -8,12 +8,6 @@ namespace Midgard {
 
 	public interface Storable : GLib.Object {
 
-		/* methods */
-		public abstract StorageManager? get_storage_manager ();
-		public abstract QueryManager? get_query_manager ();
-		public abstract SchemaManager? get_schema_manager ();
-		public abstract void set_connection (Connection mgd);
-		public abstract Connection? get_connection ();
 	}
 
 	errordomain MetadataError {
