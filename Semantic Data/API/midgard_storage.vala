@@ -35,9 +35,9 @@ namespace Midgard {
 		public abstract bool update_storage (StorageMapperType mapper);
 		public abstract bool remove_storage (StorageMapperType mapper);
 		public abstract bool move_storage (StorageMapperType src, StorageMapperType dest);
-		public abstract bool create_storage_element (StorageMapperTypeProperty mapper);
-		public abstract bool update_storage_element (StorageMapperTypeProperty mapper);
-		public abstract bool remove_storage_element (StorageMapperTypeProperty mapper);
+		public abstract bool create_storage_element (StorageMapperType mapper, StorageMapperTypeProperty property);
+		public abstract bool update_storage_element (StorageMapperType mapper, StorageMapperTypeProperty property);
+		public abstract bool remove_storage_element (StorageMapperType mapper, StorageMapperTypeProperty property);
 		public abstract bool move_storage_element (StorageMapperTypeProperty src, StoragemapperTypeProperty dest);
 
 		public abstract StorageContentManager? get_content_manager ();
@@ -85,11 +85,11 @@ namespace Midgard {
 		public abstract string value_get_typename ();
 		public abstract void value_set_gtype (GLib.Type type);
 		public abstract GLib.Type value_get_gtype ();
-		public abstract bool is_valid () throws StorageManagerTypePropertyError;
+		public abstract bool is_valid () throws StorageMapperTypePropertyError;
 		public abstract void value_set_default (GLib.Value val);
 		public abstract GLib.Value value_get_default ();
 		public abstract bool value_has_default ();
-		public abstract bool location_set (string location) throws StorageManagerTypePropertyError;
+		public abstract bool location_set (string location) throws StorageMapperTypePropertyError;
 		public abstract string location_get ();
 	}	
 
@@ -104,8 +104,11 @@ namespace Midgard {
 		public abstract string name { get; construct; }
 
 		/* methods */
+		public abstract bool add_property_mapper (StorageMapperTypeProperty property);
 		public abstract StorageMapperTypeProperty get_property_mapper (string name);
 		public abstract string[]? list_property_names ();
 		public abstract StorageManagerTypeProperty[]? list_properties();
+		public abstract bool location_set (string location) throws StorageMapperTypeError;
+		public abstract string location_get ();
 	}
 }
