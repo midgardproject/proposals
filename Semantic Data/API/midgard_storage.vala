@@ -2,14 +2,6 @@ using GLib;
 
 namespace Midgard {
 
-	errordomain StorageManagerError {
-		OBJECT_INVALID,
-		OBJECT_DUPLICATE,
-		PATH_RELATIVE,
-		PATH_INVALID,
-		INTERNAL
-	}
-
 	/*
 	nodes iface ?
 		public abstract Storable? get_by_path (string path) throws StoragemanagerError;
@@ -17,9 +9,21 @@ namespace Midgard {
 
 	*/
 
+	errordomain StorageManagerError {
+		STORAGE_INVALID,
+		STORAGE_EXISTS,
+		INTERNAL
+	}
+
 	public interface StorageManager : GLib.Object {
 
+		/* properties */
 		public abstract Config config { get; construct; }
+
+		/* signals */
+		public signal void connected ();
+		public signal void disconnected ();
+		public signal void lost-provider (); 
 
 		/* connection methods */
 		public abstract bool open () throws FIXME ;
@@ -27,19 +31,39 @@ namespace Midgard {
 		public abstract StorageManager fork ();
 		public abstract Storagemanager clone ();
 
+		public abstract bool create_storage (StorageMapperType mapper);
+		public abstract bool update_storage (StorageMapperType mapper);
+		public abstract bool remove_storage (StorageMapperType mapper);
+		public abstract bool move_storage (StorageMapperType src, StorageMapperType dest);
+		public abstract bool create_storage_element (StorageMapperTypeProperty mapper);
+		public abstract bool update_storage_element (StorageMapperTypeProperty mapper);
+		public abstract bool remove_storage_element (StorageMapperTypeProperty mapper);
+		public abstract bool move_storage_element (StorageMapperTypeProperty src, StoragemapperTypeProperty dest);
+
+		public abstract StorageContentManager? get_content_manager ();
+	}
+
+	errordomain StorageContentManagerError {
+
+		OBJECT_INVALID,
+		OBJECT_DUPLICATE,
+		INTERNAL
+	}
+
+	public interface StorageContentManager : GLib.Object {
+
+		public abstract StorageManager storagemanager { get; construct; }; 
+
 		/* per object methods */
 		public abstract bool exists (Storable object);
-		public abstract bool create (Storable object) throws StorageManagerError;
-		public abstract bool update (Storable object) throws StorageManagerError;
-		public abstract bool save (Storable object) throws StorageManagerError; 
-		public abstract bool remove (Storable object) throws StorageManagerError;
-		public abstract bool purge (Storable object) throws StorageManagerError;
+		public abstract bool create (Storable object) throws StorageContentManagerError;
+		public abstract bool update (Storable object) throws StorageContentManagerError;
+		public abstract bool save (Storable object) throws StorageContentManagerError; 
+		public abstract bool remove (Storable object) throws StorageContentManagerError;
+		public abstract bool purge (Storable object) throws StorageContentManagerError;
 
-		/* per class methods */
-		public abstract bool create_storage (string classname);
-		public abstract bool update_storage (string classname);
-		public abstract bool remove_storage (string classname);
-	}
+		public abstract QueryManager get_query_manager ();
+	} 
 
 	errordomain StorageMapperTypePropertyError {
 		TYPE_INVALID,
