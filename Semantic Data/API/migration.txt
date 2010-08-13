@@ -16,6 +16,11 @@ Implements Storable interface
  ## MidgardParameter
 Remove
 
+ ## MidgardMetadata
+Implements Metadata interface
+
+ ## MidgardObject
+Implements Storable interface, CRUD via StorageContentmanager
 
 TODO
 
@@ -23,11 +28,6 @@ TODO
 
  ## MidgardAttachment
 Implement with MidgardStorageManagerBlob
-
- ## MidgardMetadata
-
- ## MidgardObject
- Signals
 
  ## MidgardReplicator
 
