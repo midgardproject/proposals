@@ -1,0 +1,45 @@
+ ## MidgardConfig
+Stay as is 
+
+ ## MidgardConnection 
+Replaced with MdgardStorageManager
+
+ ## MidgardStorage
+Replaced with MidgardStorageManager
+
+ ## MidgardReflector
+Replaced with MidgardSchemaManager and MidgardStorageMapper
+
+ ## MidgardDBObject
+Implements Storable interface
+
+ ## MidgardParameter
+Remove
+
+
+TODO
+
+ ## MidgardView
+
+ ## MidgardAttachment
+Implement with MidgardStorageManagerBlob
+
+ ## MidgardMetadata
+
+ ## MidgardObject
+ Signals
+
+ ## MidgardReplicator
+
+ ## MidgardUser
+
+ ## MidgardCollector
+To be replaced with MidgardQueryData 
+
+ ## MidgardBlob
+To be replaced with MidgardStorageManagerBlob
+
+ ## MidgardTransaction
+Can stay as is and be associated with StorageManager
+
+ ## MidgardDBus
