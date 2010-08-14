@@ -34,12 +34,17 @@ namespace Midgard {
 		public abstract bool create_storage (StorageMapperType mapper);
 		public abstract bool update_storage (StorageMapperType mapper);
 		public abstract bool remove_storage (StorageMapperType mapper);
+		public abstract bool exists_storage (StorageMapperType mapper);
 		public abstract bool move_storage (StorageMapperType src, StorageMapperType dest);
 		public abstract bool create_storage_element (StorageMapperType mapper, StorageMapperTypeProperty property);
 		public abstract bool update_storage_element (StorageMapperType mapper, StorageMapperTypeProperty property);
 		public abstract bool remove_storage_element (StorageMapperType mapper, StorageMapperTypeProperty property);
 		public abstract bool move_storage_element (StorageMapperTypeProperty src, StoragemapperTypeProperty dest);
 
+		public abstract StorageMapperType[]? list_storage_mappers ();
+		public abstract StoragemapperType? get_storage_mapper (string name);
+		public abstract SchemaType[]? list_schema_types ();
+		public abstract SchemaType? get_schema_type (string name);
 		public abstract StorageContentManager? get_content_manager ();
 	}
 

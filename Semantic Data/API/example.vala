@@ -35,9 +35,6 @@ namespace Midgard {
 
 	type_mapper.add_property_mapper (property_mapper);
 
-	/* associate mapper with schema type */
-	type.set_storage_mapper (mapper);
-
 	/* Register class */
 	try {
 		Schema.register_type (type, "SchemaObject");	

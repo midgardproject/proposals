@@ -43,9 +43,7 @@ namespace Midgard {
 		/* methods */
 		public abstract bool property_exists (SchemaTypeProperty property);
 		public abstract void property_add (SchemaTypeProperty property) throws SchemaTypeError;
-		public abstract SchemaTypeProperty? get_property (string name); 
-		public abstract void set_storage_mapper (StorageMapper mapper) throws SchemaTypeError;
-
+		public abstract SchemaTypeProperty? get_property (string name);	
 	}
 
 	errordomain SchemaError {
