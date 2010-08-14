@@ -37,7 +37,7 @@ namespace Midgard {
 
 	/* Register class */
 	try {
-		Schema.register_type (type, "SchemaObject");	
+		Schema.register_type (type);	
 	} catch (GLib.Error e) {
 		GLib.error ("Can not register %s class. %s", type.name, e.message);
 	}

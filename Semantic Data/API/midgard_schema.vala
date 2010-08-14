@@ -41,6 +41,8 @@ namespace Midgard {
 		public abstract string name { get; construct;}	
 
 		/* methods */
+		public abstract void set_parent_type (string name);
+		public abstract string? get_parent_type ();
 		public abstract bool property_exists (SchemaTypeProperty property);
 		public abstract void property_add (SchemaTypeProperty property) throws SchemaTypeError;
 		public abstract SchemaTypeProperty? get_property (string name);	
@@ -55,7 +57,7 @@ namespace Midgard {
 	public interface Schema : GLib.Object {
 
 		/* methods */
-		public abstract void register_type (SchemaType type, string parent) throws SchemaError;
+		public abstract void register_type (SchemaType type) throws SchemaError;
 		public abstract void register_available_types () throws SchemaError;
 		public abstract Storable? factory (Connection mgd, string classname) throws SchemaError;
 		public abstract Schematype? get_schema_type (string classname); 
