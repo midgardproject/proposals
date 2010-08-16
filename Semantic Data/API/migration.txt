@@ -1,45 +1,104 @@
  ## MidgardConfig
-Stay as is 
+	
+	Stay as is 
 
  ## MidgardConnection 
-Replaced with MdgardStorageManager
+	
+	Replaced with MdgardStorageManager
+
+	### Opening connection
+ 
+	Config configuration = new Config ();
+	config.dbtype = "SQLite";
+	StorageManagerDB storage = new StorageManager ("config", config);
+	storage.open ();
+
+	Loglevelfunctionality will be replaced with particular implementation.
+
 
  ## MidgardStorage
-Replaced with MidgardStorageManager
+	
+	Replaced with MidgardStorageManager
+
+	### Creating and updating storage for given class
+
+	storage.create_storage(mapper)
+	storage.update_storage(mapper)
+
+	### Creating storage element
+	storage.create_storage_element (type_mapper, property_mapper);
 
  ## MidgardReflector
-Replaced with MidgardSchemaManager and MidgardStorageMapper
+
+	Replaced with MidgardSchemaManager and MidgardStorageMapper
+
+	### Getting info about storage property
+	StorageMapperType mapper = storage.get_storage_mapper ("article");
+	StorageMapperTypeProperty property_mapper = mapper.get_property_mapper ("id");
+	if (property_mapper.is_primary) {
+		
+	}
+	
+	### Getting info about property type
+	SchemaType type = Schema.get_schema_type ("article");
+	SchemaTypeProperty property = type.get_property ("name");
+	GLib.print ("Name holds value of %s type \n", property.get_value_typename());
 
  ## MidgardDBObject
-Implements Storable interface
+
+	Implements Storable interface.
+	Represents raw database record. No inherited properties, no workspace.
 
  ## MidgardParameter
-Remove
+
+	No direct replacement.
+	Similar functionality will be provided by SchemaObject implementation which allows
+	to store namespaced properties.
 
  ## MidgardMetadata
-Implements Metadata interface
+
+	Implements Metadata interface. Publishing, locking, approvals, etc should 
+	be provided by particular implementation. 
 
  ## MidgardObject
-Implements Storable interface, CRUD via StorageContentmanager
+
+	Implements Storable interface, CRUD via StorageContentmanager.
+	Replaced by SchemaObject.
+
+	### Query object and update
+	QueryManager query = storage.get_query_manager();
+	query.add_constraint ("name", "<>", "");
+	query.execute();
+
+	unowned SchemaObject[] objects = query.list_objects() as SchemaObject;
+	foreach (SchemaObject object in objects) {
+		object.title = "some title";
+		storage.save (object);
+	}
+
 
 TODO
 
  ## MidgardView
 
  ## MidgardAttachment
-Implement with MidgardStorageManagerBlob
+	
+	Implement with MidgardStorageManagerBlob
 
  ## MidgardReplicator
 
  ## MidgardUser
 
  ## MidgardCollector
-To be replaced with MidgardQueryData 
+
+	To be replaced with MidgardQueryData 
 
  ## MidgardBlob
-To be replaced with MidgardStorageManagerBlob
+	
+	To be replaced with MidgardStorageManagerBlob
 
  ## MidgardTransaction
-Can stay as is and be associated with StorageManager
+	
+	Can stay as is and be associated with StorageManager
 
  ## MidgardDBus
