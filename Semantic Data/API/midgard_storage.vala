@@ -42,7 +42,7 @@ namespace Midgard {
 		public abstract bool move_storage_element (StorageMapperTypeProperty src, StoragemapperTypeProperty dest);
 
 		public abstract StorageMapperType[]? list_storage_mappers ();
-		public abstract StoragemapperType? get_storage_mapper (string name);
+		public abstract StorageMapperType? get_storage_mapper (string name);
 		public abstract SchemaType[]? list_schema_types ();
 		public abstract SchemaType? get_schema_type (string name);
 		public abstract StorageContentManager? get_content_manager ();
