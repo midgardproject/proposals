@@ -10,7 +10,7 @@ namespace Midgard {
 		PARENT_INVALID
 	}
 
-	public interface SchemaModel : Executable {
+	public interface SchemaModel : GLib.Object {
 		
 		/* properties */
 		public abstract string name { get; construct; }
@@ -24,7 +24,7 @@ namespace Midgard {
 		public abstract bool is_valid () throws SchemaModelError;
 	}
 
-	public class SchemaModelProperty : SchemaModel {
+	public interface SchemaModelProperty : SchemaModel, Executable {
 
 		/* methods */
 		public abstract void set_value_typename (string type);
@@ -36,7 +36,7 @@ namespace Midgard {
 		public abstract string get_namespace ();
 	}
 
-	public class SchemaType : SchemaModel {
+	public class SchemaType : SchemaModel, Executable {
 
 	}
 

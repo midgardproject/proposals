@@ -31,10 +31,24 @@ namespace Midgard {
 		GLib.error ("Can not register %s class. %s", type.name, e.message);
 	}
 
-	StorageMapper storage_mapper = storage.create_mapper (type, "tbl_person");
+	StorageModelManager model_manager = storage.get_model_manager();
+
+	StorageMapper storage_mapper = model_manager.create_mapper (type, "tbl_person");
 	fname_mapper = new StorageMapperTypeProperty (fname_property, "firstname_field);
 	lname_mapper = new StorageMapperTypeProperty (lname_property, "lastname_field)
 	storage_mapper.add_model (fname_mapper).add_model (lname_mapper);
+
+	/* Store schema and mapper models for later use */
+	StorageModelManager model_manager = storage.get_model_manager();
+	model_manager.add_model (type).add_model (storage_mapper);
+	
+	model_manager.create ();
+
+	try {
+		model_manager.execute  ();
+	} catch (Glib.Error e) {
+		GLib.error ("Failed to store models. %s", e.message);
+	}
 
 	/* Create underlying storage for newly registered class */
 	storage_mapper.create ();
@@ -44,8 +58,6 @@ namespace Midgard {
 	} catch (GLib.Error e) {
 		GLib.error ("Can not initialize storage for %s class. %s", type.name, e.message);
 	}
-
-
 
 	/* Instantiate person */
 	SchemaObject person = Schema.factory ("person") as SchemaObject;

@@ -20,12 +20,28 @@ namespace Midgard {
 		public abstract StorageManager fork ();
 		public abstract Storagemanager clone ();
 
-		public abstract StorageMapperType create_mapper (Schematype type, string location);
-		public abstract StorageMapperType[]? list_storage_mappers ();
-		public abstract StorageMapperType? get_storage_mapper (string name);
-		public abstract SchemaType[]? list_schema_types ();
-		public abstract SchemaType? get_schema_type (string name);
 		public abstract StorageContentManager? get_content_manager ();
+		public abstract StorageModelManager? get_model_manager (); 
+	}
+
+	public interface StorageExecutor : Executor {
+		
+		/* methods */
+		public abstract bool exists ();
+	 	public abstract void create ();
+		public abstract void update ();
+		public abstract void save ();
+		public abstract void remove ();
+		public abstract void purge ();
+	}
+
+	public interface StorageModelManager : SchemaModel, StorageExecutor {
+
+		public abstract StorageMapperType create_mapper (Schematype type, string location);
+		public abstract StorageMapperType[]? list_mappers ();
+		public abstract StorageMapperType? get_mapper_by_name (string name);
+		public abstract SchemaType[]? list_schemas ();
+		public abstract SchemaType? get_schema_by_name (string name);
 	}
 
 	errordomain StorageContentManagerError {
@@ -37,7 +53,7 @@ namespace Midgard {
 
 	public interface StorageContentManager : GLib.Object {
 
-		public abstract StorageManager storagemanager { get; construct; }; 
+		/* public abstract StorageManager storagemanager { get; construct; };  */
 
 		/* per object methods */
 		public abstract bool exists (Storable object);
@@ -50,17 +66,6 @@ namespace Midgard {
 		public abstract QueryManager get_query_manager ();
 	} 
 
-	public interface StorageMapper {
-		
-		/* methods */
-		public abstract bool exists ();
-	 	public abstract void create ();
-		public abstract void update ();
-		public abstract void save ();
-		public abstract void remove ();
-		public abstract void purge ();
-	}
-
 	errordomain StorageMapperTypePropertyError {
 		TYPE_INVALID,
 		VALUE_INVALID,
@@ -69,7 +74,7 @@ namespace Midgard {
 	}
 
 	/* Initialized for every given property name */
-	public interface StorageMapperTypeProperty : StorageMapper, SchemaModelProperty, Executable {
+	public interface StorageMapperTypeProperty : StorageExecutor, SchemaModelProperty {
 	
 		/* method */
 		public abstract void set_primary (bool);
@@ -87,7 +92,7 @@ namespace Midgard {
 	}
 
 	/* Initialized for every given class name */
-	public interface StorageMapperType : StorageMapper, SchemaModel, Executable {
+	public interface StorageMapperType : StorageExecutor, SchemaModel {
 		
 		/* properties */
 		public abstract string name { get; construct; }
