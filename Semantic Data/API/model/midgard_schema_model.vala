@@ -29,15 +29,26 @@ namespace Midgard {
 		/* methods */
 		public abstract void set_value_typename (string type);
 		public abstract void set_value_gtype (GLib.Type type);
-		public abstract void set_value_default (GLib.Value);
+		public abstract void set_value_default (GLib.Value value);
 		public abstract void set_private();
 		public abstract void set_description (string description);
 		public abstract bool set_namespace (string name);
 		public abstract string get_namespace ();
 	}
 
-	public class SchemaType : SchemaModel, Executable {
+	public class SchemaType : GLib.Object, SchemaModel, Executable {
 
+		public string name {
+			get { return "foo"; }
+		}
+
+		public string get_name () { return "foo"; }
+		public SchemaModel? add_model (SchemaModel model) { return null; }
+		public SchemaModel? get_model_by_name (string name) { return null; }
+ 		public SchemaModel? add_parent_model (SchemaModel model) { return null; }
+ 		public SchemaModel? get_parent_model () { return null; }
+ 		public bool is_valid () { return false; }
+ 		public void execute () { } 
 	}
 
 	errordomain SchemaError {
@@ -47,9 +58,9 @@ namespace Midgard {
 	public class Schema : GLib.Object {
 
 		/* methods */
-		public abstract void register_type (SchemaType type) throws SchemaError, SchemaModelError;
-		public abstract void register_available_types () throws SchemaError, SchemaModelError;
-		public abstract Storable? factory (Connection mgd, string classname) throws SchemaError, SchemaModelError;
-		public abstract Schematype? get_schema_type (string classname); 
+		public void register_type (SchemaType type) throws SchemaError, SchemaModelError { }
+		public void register_available_types () throws SchemaError, SchemaModelError { }
+		public Storable? factory (StorageManager storage, string classname) throws SchemaError, SchemaModelError { return null; }
+		public SchemaType? get_schema_type (string classname) { return null; }
 	}
 }

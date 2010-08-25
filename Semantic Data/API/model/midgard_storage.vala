@@ -2,29 +2,41 @@ using GLib;
 
 namespace Midgard {
 
+	public interface QueryManager : GLib.Object {
+
+	}
+
+	public interface Config : GLib.Object {
+
+	}
+
+	errordomain StorageManagerError {
+		ACCESS_DENIED
+	}
+
 	public interface StorageManager : GLib.Object {
 
 		/* properties */
 		public abstract Config config { get; construct; }
 
 		/* signals */
-		public signal void connected ();
-		public signal void disconnected ();
-		public signal void lost-provider (); 
+		public abstract signal void connected ();
+		public abstract signal void disconnected ();
+		//public abstract signal void lost-provider (); 
 
 		/* connection methods */
-		public abstract bool open () throws FIXME ;
+		public abstract bool open () throws StorageManagerError ;
 		public abstract void close ();
 
 		/* FIXME, add Clonable interface ? */
 		public abstract StorageManager fork ();
-		public abstract Storagemanager clone ();
+		public abstract StorageManager clone ();
 
 		public abstract StorageContentManager? get_content_manager ();
 		public abstract StorageModelManager? get_model_manager (); 
 	}
 
-	public interface StorageExecutor : Executor {
+	public interface StorageExecutor : Executable {
 		
 		/* methods */
 		public abstract bool exists ();
@@ -37,7 +49,7 @@ namespace Midgard {
 
 	public interface StorageModelManager : SchemaModel, StorageExecutor {
 
-		public abstract StorageMapperType create_mapper (Schematype type, string location);
+		public abstract StorageMapperType create_mapper (SchemaType type, string location);
 		public abstract StorageMapperType[]? list_mappers ();
 		public abstract StorageMapperType? get_mapper_by_name (string name);
 		public abstract SchemaType[]? list_schemas ();
@@ -77,9 +89,9 @@ namespace Midgard {
 	public interface StorageMapperTypeProperty : StorageExecutor, SchemaModelProperty {
 	
 		/* method */
-		public abstract void set_primary (bool);
+		public abstract void set_primary (bool toggle);
 		public abstract bool is_primary ();
-		public abstract void set_index (bool);
+		public abstract void set_index (bool toggle);
 		public abstract bool has_index ();
 		public abstract bool location_set (string location);
 		public abstract string location_get ();
@@ -101,7 +113,7 @@ namespace Midgard {
 		public abstract bool add_property_mapper (StorageMapperTypeProperty property);
 		public abstract StorageMapperTypeProperty get_property_mapper (string name);
 		public abstract string[]? list_property_names ();
-		public abstract StorageManagerTypeProperty[]? list_properties();
+		public abstract StorageMapperTypeProperty[]? list_properties();
 		public abstract bool location_set (string location) throws StorageMapperTypeError;
 		public abstract string location_get ();
 	}
