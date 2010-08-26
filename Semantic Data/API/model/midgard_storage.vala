@@ -40,11 +40,11 @@ namespace Midgard {
 		
 		/* methods */
 		public abstract bool exists ();
-	 	public abstract void create ();
-		public abstract void update ();
-		public abstract void save ();
-		public abstract void remove ();
-		public abstract void purge ();
+	 	public abstract void prepare_create ();
+		public abstract void prepare_update ();
+		public abstract void prepare_save ();
+		public abstract void prepare_remove ();
+		public abstract void prepare_purge ();
 	}
 
 	public interface StorageModelManager : SchemaModel, StorageExecutor {

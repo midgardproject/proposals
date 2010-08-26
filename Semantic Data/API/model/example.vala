@@ -42,7 +42,7 @@ namespace Midgard {
 	StorageModelManager model_manager = storage.get_model_manager();
 	model_manager.add_model (type).add_model (storage_mapper);
 	
-	model_manager.create ();
+	model_manager.prepare_create ();
 
 	try {
 		model_manager.execute  ();
@@ -51,7 +51,7 @@ namespace Midgard {
 	}
 
 	/* Create underlying storage for newly registered class */
-	storage_mapper.create ();
+	storage_mapper.prepare_create ();
 
 	try {
 		storage_mapper.execute ();
