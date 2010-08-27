@@ -21,25 +21,27 @@ namespace Midgard {
 	SchemaModelProperty lname_schema = new SchemaModelProperty ("lastname", "string", "", "Person lastname");
 	schema_model.add_model (fname_schema).add_model (lname_schame);
  
-	/* Validate during execution. Might be ignored. */
-	schema_model.execute ();
+	/* Prepare to register class */
+	SchemaBuilder schema_builder = new SchemaBuilder ();
+	schema_builder.register_model (schema_model);
 
-	/* Register class */
 	try {
-		Schema.register_type (type); /* Checks if type is valid and invoke execute() of given type model */	
+		/* Validate and register person class */
+		schema_builder.execute (); 
 	} catch (GLib.Error e) {
 		GLib.error ("Can not register %s class. %s", type.name, e.message);
 	}
 
+	/* person class is valid and already registered. Prepare storage for it */
 	StorageModelManager model_manager = storage.get_model_manager();
 
 	StorageModel storage_model = model_manager.create_storage_model (type, "tbl_person");
-	fname_storage = new StorageModelProperty (fname_property, "firstname_field);
-	lname_storage = new StorageModelProperty (lname_property, "lastname_field)
+	StorageModelProperty fname_storage = new StorageModelProperty (fname_property, "firstname_field);
+	StorageModelProperty lname_storage = new StorageModelProperty (lname_property, "lastname_field)
 	storage_model.add_model (fname_mapper).add_model (lname_mapper);
 
 	/* Store schema and mapper models for later use */
-	model_manager.add_model (schema_model).add_model (storage_mapper);
+	model_manager.add_model (schema_model).add_model (storage_model);
 	model_manager.prepare_create ();
 
 	try {
@@ -57,18 +59,8 @@ namespace Midgard {
 		GLib.error ("Can not initialize storage for %s class. %s", type.name, e.message);
 	}
 
-	/* Register person class in GType system */
-	SchemaBuilder builder = new SchemaBuilder ();
-	builder.register_model (schema_model);
-
-	try {
-		builder.execute ();
-	} catch (GLib.Error e) {
-		GLib.Error ("Failed to register person class. %s", e.message);
-	}
-
 	/* Instantiate person */
-	SchemaObject person = Schema.factory ("person") as SchemaObject;
+	SchemaObject person = SchemaBuilder.factory ("person") as SchemaObject;
 	person.firstname = "John";
 
 	/* Get content manager */
