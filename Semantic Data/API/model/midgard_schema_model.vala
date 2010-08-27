@@ -49,8 +49,7 @@ namespace Midgard {
  		public SchemaModel? add_parent_model (SchemaModel model) { return null; }
  		public SchemaModel? get_parent_model () { return null; }
 		public SchemaModel[]? list_models () { return null; }
- 		public bool is_valid () { return false; }
- 		public void execute () { } 
+ 		public bool is_valid () { return false; }	
 	}
 
 	public class SchemaModelProperty : GLib.Object, Model {

@@ -32,9 +32,9 @@ namespace Midgard {
 		public abstract StorageManager fork ();
 		public abstract StorageManager clone ();
 
-		public abstract StorageContentManager? create_content_manager ();
-		public abstract StorageModelManager? create_model_manager ();
-		public abstract Profiler create_profiler ();
+		public abstract StorageContentManager? get_content_manager ();
+		public abstract StorageModelManager? get_model_manager ();
+		public abstract Profiler get_profiler ();
 	}
 
 	public interface StorageExecutor : Executable {
@@ -109,7 +109,7 @@ namespace Midgard {
 	}
 
 	/* Initialized for every given class name */
-	public interface StorageModel : StorageExecutor, Model {
+	public interface StorageModel : Model {
 		
 		public abstract bool location_set (string location) throws StorageModelError;
 		public abstract string location_get ();

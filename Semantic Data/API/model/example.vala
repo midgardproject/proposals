@@ -33,15 +33,19 @@ namespace Midgard {
 	}
 
 	/* person class is valid and already registered. Prepare its models */
-	StorageModelManager model_manager = storage.create_model_manager();
+	StorageModelManager model_manager = storage.get_model_manager();
 
 	StorageModel storage_model = model_manager.create_storage_model (type, "tbl_person");
 	StorageModelProperty fname_storage = new StorageModelProperty (fname_property, "firstname_field);
 	StorageModelProperty lname_storage = new StorageModelProperty (lname_property, "lastname_field)
 	storage_model.add_model (fname_mapper).add_model (lname_mapper);
 
-	/* Store schema and storage models for later use */
-	model_manager.add_model (schema_model).add_model (storage_model);
+	/* SchemaModel might be used and valid during application lifetime only.
+	 Add SchemaModel to ModelManager, if it should be reused later. */
+	model_manager.add_model (schema_model);
+
+	/* Create storage for defined class and its model info if succeded */
+	model_manager.add_model (storage_model);
 	model_manager.prepare_create ();
 
 	try {
@@ -50,21 +54,12 @@ namespace Midgard {
 		GLib.error ("Failed to store models. %s", e.message);
 	}
 
-	/* Create underlying storage for newly registered class */
-	storage_model.prepare_create ();
-
-	try {
-		storage_model.execute ();
-	} catch (GLib.Error e) {
-		GLib.error ("Can not initialize storage for %s class. %s", type.name, e.message);
-	}
-
 	/* Instantiate person */
 	SchemaObject person = SchemaBuilder.factory ("person") as SchemaObject;
 	person.firstname = "John";
 
 	/* Get content manager */
-	StorageContentManager content = storage.create_content_manager ();
+	StorageContentManager content = storage.get_content_manager ();
 	content.create (person as Storable);
 
 	/* Query data */
