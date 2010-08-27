@@ -32,7 +32,7 @@ namespace Midgard {
 		GLib.error ("Can not register %s class. %s", type.name, e.message);
 	}
 
-	/* person class is valid and already registered. Prepare storage for it */
+	/* person class is valid and already registered. Prepare its models */
 	StorageModelManager model_manager = storage.get_model_manager();
 
 	StorageModel storage_model = model_manager.create_storage_model (type, "tbl_person");
