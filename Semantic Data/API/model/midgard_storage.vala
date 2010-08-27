@@ -70,7 +70,7 @@ namespace Midgard {
 
 		/* public abstract StorageManager storagemanager { get; construct; };  */
 
-		public abstract Storagemanager get_storage_manager ();
+		public abstract StorageManager get_storage_manager ();
 
 		/* per object methods */
 		public abstract bool exists (Storable object);
