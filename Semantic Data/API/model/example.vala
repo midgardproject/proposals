@@ -40,7 +40,7 @@ namespace Midgard {
 	StorageModelProperty lname_storage = new StorageModelProperty (lname_property, "lastname_field)
 	storage_model.add_model (fname_mapper).add_model (lname_mapper);
 
-	/* Store schema and mapper models for later use */
+	/* Store schema and storage models for later use */
 	model_manager.add_model (schema_model).add_model (storage_model);
 	model_manager.prepare_create ();
 
@@ -51,10 +51,10 @@ namespace Midgard {
 	}
 
 	/* Create underlying storage for newly registered class */
-	storage_mapper.prepare_create ();
+	storage_model.prepare_create ();
 
 	try {
-		storage_mapper.execute ();
+		storage_model.execute ();
 	} catch (GLib.Error e) {
 		GLib.error ("Can not initialize storage for %s class. %s", type.name, e.message);
 	}
