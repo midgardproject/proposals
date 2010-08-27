@@ -16,13 +16,13 @@ namespace Midgard {
 	}
 
 	/* Create schema model for 'person' class */
-	SchemaType type = new SchemaType ("person");
-	fname_property = new SchemaTypeProperty ("firstname", "string", "", "Person firstname");
-	lname_property = new SchemaTypeProperty ("lastname", "string", "", "Person lastname");
-	type.add_model (fname_property).add_model (lname_property);
+	SchemaModel schema_model = new SchemaModel ("person");
+	SchemaModelProperty fname_schema = new SchemaModelProperty ("firstname", "string", "", "Person firstname");
+	SchemaModelProperty lname_schema = new SchemaModelProperty ("lastname", "string", "", "Person lastname");
+	schema_model.add_model (fname_schema).add_model (lname_schame);
  
 	/* Validate during execution. Might be ignored. */
-	type.execute ();
+	schema_model.execute ();
 
 	/* Register class */
 	try {
@@ -33,15 +33,13 @@ namespace Midgard {
 
 	StorageModelManager model_manager = storage.get_model_manager();
 
-	StorageMapper storage_mapper = model_manager.create_mapper (type, "tbl_person");
-	fname_mapper = new StorageMapperTypeProperty (fname_property, "firstname_field);
-	lname_mapper = new StorageMapperTypeProperty (lname_property, "lastname_field)
-	storage_mapper.add_model (fname_mapper).add_model (lname_mapper);
+	StorageModel storage_model = model_manager.create_storage_model (type, "tbl_person");
+	fname_storage = new StorageModelProperty (fname_property, "firstname_field);
+	lname_storage = new StorageModelProperty (lname_property, "lastname_field)
+	storage_model.add_model (fname_mapper).add_model (lname_mapper);
 
 	/* Store schema and mapper models for later use */
-	StorageModelManager model_manager = storage.get_model_manager();
-	model_manager.add_model (type).add_model (storage_mapper);
-	
+	model_manager.add_model (schema_model).add_model (storage_mapper);
 	model_manager.prepare_create ();
 
 	try {
@@ -57,6 +55,16 @@ namespace Midgard {
 		storage_mapper.execute ();
 	} catch (GLib.Error e) {
 		GLib.error ("Can not initialize storage for %s class. %s", type.name, e.message);
+	}
+
+	/* Register person class in GType system */
+	SchemaBuilder builder = new SchemaBuilder ();
+	builder.register_model (schema_model);
+
+	try {
+		builder.execute ();
+	} catch (GLib.Error e) {
+		GLib.Error ("Failed to register person class. %s", e.message);
 	}
 
 	/* Instantiate person */
