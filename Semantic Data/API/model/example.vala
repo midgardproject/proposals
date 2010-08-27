@@ -33,7 +33,7 @@ namespace Midgard {
 	}
 
 	/* person class is valid and already registered. Prepare its models */
-	StorageModelManager model_manager = storage.get_model_manager();
+	StorageModelManager model_manager = storage.create_model_manager();
 
 	StorageModel storage_model = model_manager.create_storage_model (type, "tbl_person");
 	StorageModelProperty fname_storage = new StorageModelProperty (fname_property, "firstname_field);
@@ -64,7 +64,7 @@ namespace Midgard {
 	person.firstname = "John";
 
 	/* Get content manager */
-	StorageContentManager content = storage.get_content_manager ();
+	StorageContentManager content = storage.create_content_manager ();
 	content.create (person as Storable);
 
 	/* Query data */

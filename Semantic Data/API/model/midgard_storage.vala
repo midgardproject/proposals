@@ -32,8 +32,9 @@ namespace Midgard {
 		public abstract StorageManager fork ();
 		public abstract StorageManager clone ();
 
-		public abstract StorageContentManager? get_content_manager ();
-		public abstract StorageModelManager? get_model_manager (); 
+		public abstract StorageContentManager? create_content_manager ();
+		public abstract StorageModelManager? create_model_manager ();
+		public abstract Profiler create_profiler ();
 	}
 
 	public interface StorageExecutor : Executable {
@@ -48,6 +49,8 @@ namespace Midgard {
 	}
 
 	public interface StorageModelManager : SchemaModel, StorageExecutor {
+
+		public abstract StorageManager get_storage_manager ();
 
 		public abstract StorageModel create_storage_model (SchemaModel schema_model, string location);
 		public abstract StorageModel[]? list_storage_models ();
@@ -66,6 +69,8 @@ namespace Midgard {
 	public interface StorageContentManager : GLib.Object {
 
 		/* public abstract StorageManager storagemanager { get; construct; };  */
+
+		public abstract Storagemanager get_storage_manager ();
 
 		/* per object methods */
 		public abstract bool exists (Storable object);
