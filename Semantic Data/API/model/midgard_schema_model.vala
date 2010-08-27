@@ -2,7 +2,7 @@ using GLib;
 
 namespace Midgard {
 
-	errordomain SchemaModelError {
+	errordomain ModelError {
 		NAME_INVALID,
 		TYPE_INVALID,
 		VALUE_INVALID,
@@ -10,7 +10,7 @@ namespace Midgard {
 		PARENT_INVALID
 	}
 
-	public interface SchemaModel : GLib.Object {
+	public interface Model : GLib.Object {
 		
 		/* properties */
 		public abstract string name { get; construct; }
@@ -21,22 +21,23 @@ namespace Midgard {
 		public abstract SchemaModel get_model_by_name (string name);
 		public abstract SchemaModel add_parent_model (SchemaModel model);
 		public abstract SchemaModel get_parent_model ();
-		public abstract bool is_valid () throws SchemaModelError;
+		public abstract SchemaModel[]? list_models ();
+		public abstract bool is_valid () throws ModelError;
 	}
 
-	public interface SchemaModelProperty : SchemaModel, Executable {
+	public interface ModelProperty : Model, Executable {
 
 		/* methods */
-		public abstract void set_value_typename (string type);
+		public abstract void set_value_typename (string name);
 		public abstract void set_value_gtype (GLib.Type type);
 		public abstract void set_value_default (GLib.Value value);
-		public abstract void set_private();
+		public abstract void set_private (bool toggle);
 		public abstract void set_description (string description);
 		public abstract bool set_namespace (string name);
 		public abstract string get_namespace ();
 	}
 
-	public class SchemaType : GLib.Object, SchemaModel, Executable {
+	public class SchemaModel : GLib.Object, Model {
 
 		public string name {
 			get { return "foo"; }
@@ -47,20 +48,46 @@ namespace Midgard {
 		public SchemaModel? get_model_by_name (string name) { return null; }
  		public SchemaModel? add_parent_model (SchemaModel model) { return null; }
  		public SchemaModel? get_parent_model () { return null; }
+		public SchemaModel[]? list_models () { return null; }
  		public bool is_valid () { return false; }
  		public void execute () { } 
 	}
 
-	errordomain SchemaError {
+	public class SchemaModelProperty : GLib.Object, Model {
+	
+		public string name {
+			get { return "foo"; }
+		}
+
+		public string get_name () { return "foo"; }
+		public SchemaModel? add_model (SchemaModel model) { return null; }
+		public SchemaModel? get_model_by_name (string name) { return null; }
+ 		public SchemaModel? add_parent_model (SchemaModel model) { return null; }
+ 		public SchemaModel? get_parent_model () { return null; }
+		public SchemaModel[]? list_models () { return null; }
+		public bool is_valid () { return false; }
+
+		public void set_value_typename (string name) { return; }
+		public void set_value_gtype (GLib.Type type) { return; }
+		public void set_value_default (GLib.Value value) { return; }
+		public void set_private (bool toggle) { return; }
+		public void set_description (string description) { return; }
+		public bool set_namespace (string name) { return false; }
+		public string get_namespace () { return "foo"; }
+	}
+
+	errordomain SchemaBuilderError {
 		NAME_EXISTS
 	}
 
-	public class Schema : GLib.Object {
+	public class SchemaBuilder : GLib.Object, Executable {
 
 		/* methods */
-		public void register_type (SchemaType type) throws SchemaError, SchemaModelError { }
-		public void register_available_types () throws SchemaError, SchemaModelError { }
-		public Storable? factory (StorageManager storage, string classname) throws SchemaError, SchemaModelError { return null; }
-		public SchemaType? get_schema_type (string classname) { return null; }
+		public void register_model (SchemaModel model) throws SchemaBuilderError, ModelError { }
+		public void register_storage_models (StorageManager manager) throws SchemaBuilderError, ModelError { }
+		public Storable? factory (StorageManager storage, string classname) throws SchemaBuilderError, ModelError { return null; }
+		public SchemaModel? get_schema_model (string classname) { return null; }
+		
+		public void execute () { return; }
 	}
 }

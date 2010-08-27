@@ -49,11 +49,11 @@ namespace Midgard {
 
 	public interface StorageModelManager : SchemaModel, StorageExecutor {
 
-		public abstract StorageMapperType create_mapper (SchemaType type, string location);
-		public abstract StorageMapperType[]? list_mappers ();
-		public abstract StorageMapperType? get_mapper_by_name (string name);
-		public abstract SchemaType[]? list_schemas ();
-		public abstract SchemaType? get_schema_by_name (string name);
+		public abstract StorageModel create_storage_model (SchemaModel schema_model, string location);
+		public abstract StorageModel[]? list_storage_models ();
+		public abstract StorageModel? get_model_by_name (string name);
+		public abstract SchemaModel[]? list_schema_models ();
+		public abstract SchemaModel? get_schema_model_by_name (string name);
 	}
 
 	errordomain StorageContentManagerError {
@@ -78,7 +78,7 @@ namespace Midgard {
 		public abstract QueryManager get_query_manager ();
 	} 
 
-	errordomain StorageMapperTypePropertyError {
+	errordomain StorageModelPropertyError {
 		TYPE_INVALID,
 		VALUE_INVALID,
 		LOCATION_EXISTS,
@@ -86,7 +86,7 @@ namespace Midgard {
 	}
 
 	/* Initialized for every given property name */
-	public interface StorageMapperTypeProperty : StorageExecutor, SchemaModelProperty {
+	public interface StorageModelProperty : StorageExecutor, ModelProperty {
 	
 		/* method */
 		public abstract void set_primary (bool toggle);
@@ -97,24 +97,16 @@ namespace Midgard {
 		public abstract string location_get ();
 	}	
 
-	errordomain StorageMapperTypeError {
+	errordomain StorageModelError {
 		STORAGE_INVALID,
 		STORAGE_EXISTS,
 		INTERNAL
 	}
 
 	/* Initialized for every given class name */
-	public interface StorageMapperType : StorageExecutor, SchemaModel {
+	public interface StorageModel : StorageExecutor, Model {
 		
-		/* properties */
-		public abstract string name { get; construct; }
-
-		/* methods */
-		public abstract bool add_property_mapper (StorageMapperTypeProperty property);
-		public abstract StorageMapperTypeProperty get_property_mapper (string name);
-		public abstract string[]? list_property_names ();
-		public abstract StorageMapperTypeProperty[]? list_properties();
-		public abstract bool location_set (string location) throws StorageMapperTypeError;
+		public abstract bool location_set (string location) throws StorageModelError;
 		public abstract string location_get ();
 	}
 }
