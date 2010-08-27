@@ -41,11 +41,11 @@ namespace Midgard {
 		
 		/* methods */
 		public abstract bool exists ();
-	 	public abstract void prepare_create ();
-		public abstract void prepare_update ();
-		public abstract void prepare_save ();
-		public abstract void prepare_remove ();
-		public abstract void prepare_purge ();
+	 	public abstract void prepare_create () throws ValidationError;
+		public abstract void prepare_update () throws ValidationError;
+		public abstract void prepare_save () throws ValidationError;
+		public abstract void prepare_remove () throws ValidationError;
+		public abstract void prepare_purge () throws ValidationError;
 	}
 
 	public interface StorageModelManager : SchemaModel, StorageExecutor {

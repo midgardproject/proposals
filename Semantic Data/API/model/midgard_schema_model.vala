@@ -2,12 +2,13 @@ using GLib;
 
 namespace Midgard {
 
-	errordomain ModelError {
+	errordomain ValidationError {
 		NAME_INVALID,
 		TYPE_INVALID,
 		VALUE_INVALID,
 		REFERENCE_INVALID,
-		PARENT_INVALID
+		PARENT_INVALID,
+		LOCATION_INVALID
 	}
 
 	public interface Model : GLib.Object {
@@ -22,7 +23,6 @@ namespace Midgard {
 		public abstract SchemaModel add_parent_model (SchemaModel model);
 		public abstract SchemaModel get_parent_model ();
 		public abstract SchemaModel[]? list_models ();
-		public abstract bool is_valid () throws ModelError;
 	}
 
 	public interface ModelProperty : Model, Executable {
@@ -82,9 +82,9 @@ namespace Midgard {
 	public class SchemaBuilder : GLib.Object, Executable {
 
 		/* methods */
-		public void register_model (SchemaModel model) throws SchemaBuilderError, ModelError { }
-		public void register_storage_models (StorageManager manager) throws SchemaBuilderError, ModelError { }
-		public Storable? factory (StorageManager storage, string classname) throws SchemaBuilderError, ModelError { return null; }
+		public void register_model (SchemaModel model) throws SchemaBuilderError, ValidationError { }
+		public void register_storage_models (StorageManager manager) throws SchemaBuilderError, ValidationError { }
+		public Storable? factory (StorageManager storage, string classname) throws SchemaBuilderError, ValidationError { return null; }
 		public SchemaModel? get_schema_model (string classname) { return null; }
 		
 		public void execute () { return; }
