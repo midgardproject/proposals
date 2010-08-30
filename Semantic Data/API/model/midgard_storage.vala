@@ -10,6 +10,26 @@ namespace Midgard {
 
 	}
 
+	/* FIXME, improve it so we can catch exception in one step */
+	public interface Transaction : GLib.Object {
+
+		public abstract string name ( get; construct; }
+
+		public abstract bool begin ();
+		public abstract bool commit ();
+		public abstract bool rollback ();
+		public abstract bool get_status ();
+		public abstract string get_name ();
+	}
+
+	public interface StorageManagerPool : GLib.Object {
+		
+		public abstract void register_manager_type (string classname);
+		public abstract StorageManager create_manager (string classname);
+		public abstract string[]? list_managers();
+		public abstract StorageManager? get_manager_by_name (string name);
+	}
+
 	errordomain StorageManagerError {
 		ACCESS_DENIED
 	}
@@ -17,6 +37,7 @@ namespace Midgard {
 	public interface StorageManager : GLib.Object {
 
 		/* properties */
+		public abstract string name { get; construct; }
 		public abstract Config config { get; construct; }
 
 		/* signals */
@@ -35,6 +56,7 @@ namespace Midgard {
 		public abstract StorageContentManager? get_content_manager ();
 		public abstract StorageModelManager? get_model_manager ();
 		public abstract Profiler get_profiler ();
+		public abstract Transaction? get_transaction ();
 	}
 
 	public interface StorageExecutor : Executable {
@@ -82,13 +104,6 @@ namespace Midgard {
 
 		public abstract QueryManager get_query_manager ();
 	} 
-
-	errordomain StorageModelPropertyError {
-		TYPE_INVALID,
-		VALUE_INVALID,
-		LOCATION_EXISTS,
-		LOCATION_INVALID
-	}
 
 	/* Initialized for every given property name */
 	public interface StorageModelProperty : StorageExecutor, ModelProperty {
