@@ -11,12 +11,11 @@ namespace Midgard {
 	}
 
 	/* FIXME, improve it so we can catch exception in one step */
-	public interface Transaction : GLib.Object {
+	public interface Transaction : GLib.Object, Executable {
 
 		public abstract string name ( get; construct; }
 
 		public abstract bool begin ();
-		public abstract bool commit ();
 		public abstract bool rollback ();
 		public abstract bool get_status ();
 		public abstract string get_name ();
