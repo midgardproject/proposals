@@ -41,8 +41,8 @@ namespace Midgard {
 		public abstract Config config { get; construct; }
 
 		/* signals */
-		public abstract signal void connected ();
-		public abstract signal void disconnected ();
+		public abstract signal void opened ();
+		public abstract signal void closed ();
 		//public abstract signal void lost-provider (); 
 
 		/* connection methods */
