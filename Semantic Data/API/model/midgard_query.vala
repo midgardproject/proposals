@@ -77,7 +77,8 @@ namespace Midgard
 
 	public interface QueryData : QueryExecutor {
 		
-		public abstract void add_join (string type, QueryProperty left_property, QueryProperty right_property);		
+		public abstract void add_join (string type, QueryProperty left_property, QueryProperty right_property);	
+		public abstract void collect_property (QueryProperty property, QueryStorage storage);	
 		public abstract ?? list_data ();
 	}
 }
