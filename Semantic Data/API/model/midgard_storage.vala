@@ -24,7 +24,7 @@ namespace Midgard {
 	public interface StorageManagerPool : GLib.Object {
 		
 		public abstract void register_manager_type (string classname);
-		public abstract StorageManager create_manager (string classname);
+		public abstract StorageManager create_manager (string classname, string name);
 		public abstract string[]? list_managers();
 		public abstract StorageManager? get_manager_by_name (string name);
 	}
