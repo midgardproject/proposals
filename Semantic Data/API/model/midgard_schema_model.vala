@@ -23,6 +23,7 @@ namespace Midgard {
 		public abstract Model add_parent_model (Model model);
 		public abstract Model get_parent_model ();
 		public abstract Model[]? list_models ();
+		public abstract ModelReflector get_reflector ();
 	}
 
 	public interface ModelProperty : Model, Executable {
