@@ -18,11 +18,11 @@ namespace Midgard {
 
 		/* methods */
 		public abstract string get_name ();
-		public abstract SchemaModel add_model (SchemaModel model);
-		public abstract SchemaModel get_model_by_name (string name);
-		public abstract SchemaModel add_parent_model (SchemaModel model);
-		public abstract SchemaModel get_parent_model ();
-		public abstract SchemaModel[]? list_models ();
+		public abstract Model add_model (Model model);
+		public abstract Model get_model_by_name (string name);
+		public abstract Model add_parent_model (Model model);
+		public abstract Model get_parent_model ();
+		public abstract Model[]? list_models ();
 	}
 
 	public interface ModelProperty : Model, Executable {
