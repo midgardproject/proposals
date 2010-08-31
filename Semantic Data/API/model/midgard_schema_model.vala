@@ -14,27 +14,24 @@ namespace Midgard {
 	public interface Model : GLib.Object {
 		
 		/* properties */
-		public abstract string name { get; construct; }
+		public abstract Model       parent_model    { get; set; }
+		public abstract string      namespace       { get; set; construct; }
+		public abstract string      name            { get; set; construct; }
 
 		/* methods */
-		public abstract string get_name ();
 		public abstract Model add_model (Model model);
 		public abstract Model get_model_by_name (string name);
-		public abstract Model add_parent_model (Model model);
-		public abstract Model get_parent_model ();
 		public abstract Model[]? list_models ();
 	}
 
 	public interface ModelProperty : Model, Executable {
-
-		/* methods */
-		public abstract void set_value_typename (string name);
-		public abstract void set_value_gtype (GLib.Type type);
-		public abstract void set_value_default (GLib.Value value);
-		public abstract void set_private (bool toggle);
-		public abstract void set_description (string description);
-		public abstract bool set_namespace (string name);
-		public abstract string get_namespace ();
+		
+		/* properties */
+		public abstract GLib.Type   value_gtype     { get; set; }
+		public abstract string      value_typename  { get; set; }
+		public abstract GLib.Value  value_default   { get; set; }
+		public abstract string      description     { get; set; }
+		public abstract bool        is_private      { get; set; }
 	}
 
 	public class SchemaModel : GLib.Object, Model {
