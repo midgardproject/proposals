@@ -30,13 +30,13 @@ namespace Midgard {
 		/* Register it in type system */
 		schema_builder.execute (); 
 	} catch (GLib.Error e) {
-		GLib.error ("Can not register %s class. %s", type.name, e.message);
+		GLib.error ("Can not register %s class. %s", schema_model.name, e.message);
 	}
 
 	/* person class is valid and already registered. Prepare its models */
 	StorageModelManager model_manager = storage.get_model_manager();
 
-	StorageModel storage_model = model_manager.create_storage_model (type, "tbl_person");
+	StorageModel storage_model = model_manager.create_storage_model (schema_model, "tbl_person");
 	StorageModelProperty fname_storage = StorageModelProperty (fname_property, "firstname_field");
 	StorageModelProperty lname_storage = StorageModelProperty (lname_property, "lastname_field")
 	storage_model.add_model (fname_mapper).add_model (lname_mapper);

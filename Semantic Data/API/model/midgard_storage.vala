@@ -69,7 +69,7 @@ namespace Midgard {
 		public abstract void prepare_purge () throws ValidationError;
 	}
 
-	public interface StorageModelManager : SchemaModel, StorageExecutor {
+	public interface StorageModelManager : Model, StorageExecutor {
 
 		public abstract StorageManager get_storage_manager ();
 
