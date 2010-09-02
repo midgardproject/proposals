@@ -36,12 +36,13 @@ namespace Midgard {
 	public interface StorageManager : GLib.Object {
 
 		/* properties */
-		public abstract string                name            { get; construct; }
-		public abstract Config                config          { get; construct; }
-		public abstract StorageContentManager content_manager { get; }
-		public abstract StorageModelManager   model_manager   { get; }
-		public abstract Profiler              profiler        { get; }
-		public abstract Transaction           transaction     { get; }
+		public abstract string                	name            	{ get; construct; }
+		public abstract Config                	config          	{ get; construct; }
+		public abstract StorageContentManager 	content_manager 	{ get; }
+		public abstract StorageModelManager   	model_manager   	{ get; }
+		public abstract Profiler              	profiler        	{ get; }
+		public abstract Transaction           	transaction     	{ get; }
+		public abstract StorageWorkspaceManager	workspace_manager	{ get; }	
 
 		/* signals */
 		public abstract signal void opened ();
@@ -50,11 +51,16 @@ namespace Midgard {
 
 		/* connection methods */
 		public abstract bool open () throws StorageManagerError ;
-		public abstract void close ();
+		public abstract bool close (); throws StorageManagerError ; 
 
 		/* FIXME, add Clonable interface ? */
 		public abstract StorageManager fork ();
 		public abstract StorageManager clone ();
+	}
+
+	public interface StorageWorkspaceManager : StorageManager {
+
+		public abstract WorkspaceStorage { get; set; }
 	}
 
 	public interface StorageExecutor : Executable {
