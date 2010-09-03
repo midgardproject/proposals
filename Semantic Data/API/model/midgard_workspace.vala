@@ -12,13 +12,11 @@ namespace Midgard {
 
 	public interface WorkspaceStorage : GLib.Object {
 	
-		public abstract string get_path ();
+		public abstract string path { get; construct; }
 	}
 
 	public class WorkspaceContext : GLib.Object, WorkspaceStorage {
 
-		public bool exists (string path);
-		public bool create (string path);
 		public string[]? get_workspace_names ();
 		public Workspace? get_workspace_by_name (); 
 		public bool has_workspace (Workspace workspace);
@@ -26,12 +24,9 @@ namespace Midgard {
 
 	public class Workspace : GLib.Object, WorkspaceStorage {
 
-		public SQLWorkspaceManager manager { get; construct; }
 		public Workspace parent { get; construct; }
-		public WorkspaceContext { get; }
+		public WorkspaceContext context { get; }
 
-		public bool create ();
-		public bool update ();
 		public Workspace[]? list_children ();
 		public Workspace? get_by_path ();
 	}
@@ -39,6 +34,7 @@ namespace Midgard {
 	public class SQLWorkspaceManager : StorageWorkspaceManager, SQLStorageManager {
 
 		public WorkspaceStorage workspace { get; set; }
-
+		public bool workspace_create (WorkspaceStorage workspace) throws WorkspaceStorageError;
+		public bool workspace_exists (WorkspaceStorage workspace) throws WorkspaceStorageError;	
 	}
 }
