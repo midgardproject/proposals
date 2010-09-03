@@ -2,10 +2,6 @@ using GLib;
 
 namespace Midgard {
 
-	errordomain StorableError {
-		
-	}
-
 	public interface Storable : GLib.Object {
 
 		/* signals */
@@ -15,42 +11,43 @@ namespace Midgard {
 		public abstract signal void updated ();
 		public abstract signal void remove ();
 		public abstract signal void removed ();
-
-		/* methods */
-		public abstract SchemaManager? get_schema_manager ();
 	}
 
-	errordomain MetadataError {
+	public abstract class Timestamp : GLib.Object {
 
 	}
 
-	public abstract class Metadata : Storable {
+	public abstract class Metadata : GLib.Object, Storable {
 
 		/* proprties */
-		public abstract string parent { get; construct; };	
-		public abstract uint action { get; }; /* is it needed ? */
-		public abstract Timestamp created { get; };
-		public abstract Timestamp revised { get; };
+		public abstract string parent { get; construct; }	
+		public abstract uint action { get; } /* is it needed ? */
+		public abstract Timestamp created { get; }
+		public abstract Timestamp revised { get; }
 	}
 
-	errordomain SchemaObjectError {
-		
-	}
-
-	public abstract class SchemaObject : Storable {
+	public abstract class SchemaObject : GLib.Object, Storable {
 
 		/* properties */
-		public string guid { get; };
-		public uint id { get; };
-		public Metadata { get; };	
+		public string guid { 
+			get { return ""; }
+		}
+
+		public uint id { 
+			get { return 0; }
+		}
+
+		public Metadata metadata { 
+			get {  return null; }	
+		}
 
 		/* methods */
-		public abstract void set_property_value (string name, GLib.Value);
+		public abstract void set_property_value (string name, GLib.Value value);
 		public abstract GLib.Value get_property_value (string name);
 		public abstract string[]? list_all_properties ();
 	}
 
-	public abstract class DBObject : Storable {
+	public abstract class DBObject : GLib.Object, Storable {
 
 	}
 }

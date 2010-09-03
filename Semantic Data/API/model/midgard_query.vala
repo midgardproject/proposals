@@ -3,24 +3,24 @@ using GLib;
 
 namespace Midgard
 {
-	public interface QueryConstraintSimple : Glib.Object {
+	public interface QueryConstraintSimple : GLib.Object {
 
-		QueryConstraintSimple[]? list_constraints ();
+		public abstract QueryConstraintSimple[]? list_constraints ();
 	}
 
 	public interface QueryStorage : GLib.Object {
 		
 		/* properties */
-		public string classname { get; set; }
+		public abstract string classname { get; set; }
 	}
 
 	public interface QueryConstraint : QueryConstraintSimple {
 
 		/* properties */
-		public QueryHolder holder { get; set; }
-		public QueryProperty property { get; set; }
-		public QueryStorage storage { get; set; }
-		public string operator { get; set; }
+		public abstract QueryValueHolder holder { get; set; }
+		public abstract QueryProperty property { get; set; }
+		public abstract QueryStorage storage { get; set; }
+		public abstract string operator { get; set; }
 
 		/* methods */
 		public abstract QueryStorage? get_storage ();
@@ -41,21 +41,31 @@ namespace Midgard
 		public abstract void add_constraint (QueryConstraintSimple constraint);
 	}
 
-	public interface QueryConstraintValueHolder : GLib.Object {
+	public interface QueryValueHolder : GLib.Object {
 		
 		public abstract GLib.Value get_value ();
-		public abstract void set_value (GLib.Value); 
+		public abstract void set_value (GLib.Value value); 
 	}	
 
-	public class QueryValue : GLib.Object, QueryConstraintValueHolder {
-		
+	public class QueryValue : GLib.Object, QueryValueHolder {
+
+		private GLib.Value _value;
+			
+		public GLib.Value get_value () { return this._value; }
+		public void set_value (GLib.Value value) { this._value = value; }
+	
 	}
 
-	public class QueryProperty : GLib.Object, QueryConstraintValueHolder {
-		
+	public class QueryProperty : GLib.Object, QueryValueHolder {
+
+		private GLib.Value _value;	
+	
 		/* properties */
 		string property { get; set; }
 		QueryStorage storage { get; set; }
+
+		public GLib.Value get_value () { return this._value; }
+		public void set_value (GLib.Value value) { this._value = value; }
 	}
 
 	public interface QueryExecutor : Executable {
@@ -71,7 +81,7 @@ namespace Midgard
 	public interface QuerySelect : QueryExecutor {
 		
 		public abstract void add_join (string type, QueryProperty left_property, QueryProperty right_property);		
-		public abstract void Storable[]? list_objects ();
+		public abstract Storable[]? list_objects ();
 		public abstract void toggle_read_only (bool toggle);
 	}
 
@@ -79,6 +89,6 @@ namespace Midgard
 		
 		public abstract void add_join (string type, QueryProperty left_property, QueryProperty right_property);	
 		public abstract void collect_property (QueryProperty property, QueryStorage storage);	
-		public abstract ?? list_data ();
+		public abstract void list_data ();
 	}
 }

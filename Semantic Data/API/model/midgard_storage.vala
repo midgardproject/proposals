@@ -13,7 +13,7 @@ namespace Midgard {
 	/* FIXME, improve it so we can catch exception in one step */
 	public interface Transaction : GLib.Object, Executable {
 
-		public abstract string name ( get; construct; }
+		public abstract string name { get; construct; }
 
 		public abstract bool begin ();
 		public abstract bool rollback ();
@@ -51,7 +51,7 @@ namespace Midgard {
 
 		/* connection methods */
 		public abstract bool open () throws StorageManagerError ;
-		public abstract bool close (); throws StorageManagerError ; 
+		public abstract bool close () throws StorageManagerError ; 
 
 		/* FIXME, add Clonable interface ? */
 		public abstract StorageManager fork ();
@@ -60,7 +60,7 @@ namespace Midgard {
 
 	public interface StorageWorkspaceManager : StorageManager {
 
-		public abstract WorkspaceStorage { get; set; }
+		public abstract WorkspaceStorage workspace { get; set; }
 	}
 
 	public interface StorageExecutor : Executable {

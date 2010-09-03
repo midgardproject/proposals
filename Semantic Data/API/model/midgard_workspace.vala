@@ -1,5 +1,5 @@
 
-using Glib;
+using GLib;
 
 namespace Midgard {
 
@@ -17,24 +17,44 @@ namespace Midgard {
 
 	public class WorkspaceContext : GLib.Object, WorkspaceStorage {
 
-		public string[]? get_workspace_names ();
-		public Workspace? get_workspace_by_name (); 
-		public bool has_workspace (Workspace workspace);
+		private string _path;
+
+		public string path {
+			get { return this._path; }
+			construct { this._path = value; }
+		} 
+
+		public string[]? get_workspace_names () { return null; }
+		public Workspace? get_workspace_by_name () { return null; } 
+		public bool has_workspace (Workspace workspace) { return false; }
 	}
 
 	public class Workspace : GLib.Object, WorkspaceStorage {
 
-		public Workspace parent { get; construct; }
-		public WorkspaceContext context { get; }
+		private WorkspaceContext _ctx;
+		private string _path;
+		private Workspace _parent;
 
-		public Workspace[]? list_children ();
-		public Workspace? get_by_path ();
+		public string path {
+			get { return this._path; }
+			construct { this._path = value; }
+		} 
+		public Workspace parent { 
+				get { return this._parent; }
+				set { this._parent = value; }
+		}
+		public WorkspaceContext context { 
+			get { return this._ctx; }
+		}
+
+		public Workspace[]? list_children () { return null; }
+		public Workspace? get_by_path () { return null; }
 	}
 
 	public class SQLWorkspaceManager : StorageWorkspaceManager, SQLStorageManager {
 
 		public WorkspaceStorage workspace { get; set; }
-		public bool workspace_create (WorkspaceStorage workspace) throws WorkspaceStorageError;
-		public bool workspace_exists (WorkspaceStorage workspace) throws WorkspaceStorageError;	
+		public bool workspace_create (WorkspaceStorage workspace) throws WorkspaceStorageError { return false; }
+		public bool workspace_exists (WorkspaceStorage workspace) throws WorkspaceStorageError { return false; }	
 	}
 }

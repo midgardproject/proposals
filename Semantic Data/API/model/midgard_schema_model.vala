@@ -14,13 +14,13 @@ namespace Midgard {
 	public interface Model : GLib.Object {
 		
 		/* properties */
-		public abstract Model       parent_model    { get; set; }
-		public abstract string      namespace       { get; set; construct; }
-		public abstract string      name            { get; set; construct; }
+		public abstract Model       parent    { get; set; }
+		public abstract string      @namespace       { get; set;  }
+		public abstract string      name            { get; set;  }
 
 		/* methods */
 		public abstract Model add_model (Model model);
-		public abstract Model get_model_by_name (string name);
+		public abstract Model? get_model_by_name (string name);
 		public abstract Model[]? list_models ();
 		public abstract ModelReflector get_reflector ();
 	}
@@ -39,29 +39,56 @@ namespace Midgard {
 
 		public string name {
 			get { return "foo"; }
+			set { this.name = value; }
+		}
+
+		public string @namespace {
+			get { return "foo"; }
+			set { this.namespace = value; }
+		}
+
+		public Model parent {
+			get { return this.parent; }
+			set { this.parent = value; }
 		}
 
 		public string get_name () { return "foo"; }
-		public SchemaModel? add_model (SchemaModel model) { return null; }
-		public SchemaModel? get_model_by_name (string name) { return null; }
- 		public SchemaModel? add_parent_model (SchemaModel model) { return null; }
- 		public SchemaModel? get_parent_model () { return null; }
-		public SchemaModel[]? list_models () { return null; }
+		public Model add_model (Model model) 
+			requires (model is SchemaModel) {
+			return this; 
+		}
+		public Model? get_model_by_name (string name) { return null; }
+ 		public Model add_parent_model (Model model) { return this; }
+ 		public Model? get_parent_model () { return null; }
+		public Model[]? list_models () { return null; }
+		public ModelReflector get_reflector () { return null; } 
  		public bool is_valid () { return false; }	
 	}
 
 	public class SchemaModelProperty : GLib.Object, Model {
 	
 		public string name {
-			get { return "foo"; }
+			get { return this.name; }
+			set { this.name = value; }
+		}
+
+		public string @namespace {
+			get { return this.namespace; }
+			set { this.namespace = value; }
+		}
+
+		public Model parent {
+			get { return this.parent; }
+			set { this.parent = value; }
 		}
 
 		public string get_name () { return "foo"; }
-		public SchemaModel? add_model (SchemaModel model) { return null; }
-		public SchemaModel? get_model_by_name (string name) { return null; }
- 		public SchemaModel? add_parent_model (SchemaModel model) { return null; }
- 		public SchemaModel? get_parent_model () { return null; }
-		public SchemaModel[]? list_models () { return null; }
+		public Model add_model (Model model) { return this; }
+		public Model? get_model_by_name (string name) { return null; }
+ 		public Model add_parent_model (Model model) { return this; }
+ 		public Model? get_parent_model () { return null; }
+		public Model[]? list_models () { return null; }
+		public ModelReflector get_reflector () { return null; } 
 		public bool is_valid () { return false; }
 
 		public void set_value_typename (string name) { return; }
@@ -85,6 +112,6 @@ namespace Midgard {
 		public Storable? factory (StorageManager storage, string classname) throws SchemaBuilderError, ValidationError { return null; }
 		public SchemaModel? get_schema_model (string classname) { return null; }
 		
-		public void execute () { return; }
+		public bool execute () { return false; }
 	}
 }
