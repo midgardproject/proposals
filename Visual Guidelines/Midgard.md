@@ -44,4 +44,23 @@ Each product of the Midgard Project will have its own logo, modeled on the origi
 
 From left to right: Midgard Create, Midgard MVC, Midgard Daemon, Midgard Content Repository.
 
+## Focus on simplicity
 
+Visuals with in Midgard projects should focus on simplicity and clarity. If you can display something reasonably on a plain white or black background, do so. Also try to avoid unnecessary borders and effects, instead using necessary space and large, readable font sizes.
+
+### Gradients
+
+Some Midgard materials display the product names and logos on top of a large area with a slight gradient. If you need to recreate this, the gradient goes from `#343c3d` to `#1b1f20`, top to bottom.
+
+CSS3 implementation of this gradient:
+
+    header {
+        padding: 1em;
+        background-color: #343c3d;
+        background: -webkit-linear-gradient(#343c3d, #1b1f20);
+        background: -moz-linear-gradient(100% 100% 90deg, #343c3d, #1b1f20);
+    }
+
+### Notice color
+
+If there is a notice that the user must specifically see (for example, an error message), a good practice is to show it on a orange background. Use color `#fcaf3e` for this.
