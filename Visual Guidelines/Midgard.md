@@ -23,16 +23,16 @@ The preferred highlight color is green (`#4e9a06`).
 
 By default the logos of the Midgard Project and its products are used in black-and-white versions. On light backgrounds, the black ones should be used, and on dark backgrounds the white ones.
 
-* [Black logos (SVG)](midgard_black.svg)
-* [White logos (SVG)](midgard_white.svg)
+* [Black logos (SVG)](https://github.com/midgardproject/proposals/raw/master/Visual%20Guidelines/midgard_black.svg)
+* [White logos (SVG)](https://github.com/midgardproject/proposals/raw/master/Visual%20Guidelines/midgard_white.svg)
 
 There are also colored versions using the "old" Midgard colors of yellow and brown that may be used in contexts where more color is needed.
 
-* [Colorful logos (SVG)](midgard_colors.svg)
+* [Colorful logos (SVG)](https://github.com/midgardproject/proposals/raw/master/Visual%20Guidelines/midgard_colors.svg)
 
 ### Project logo
 
-![The Midgard Project](midgard_black.png)
+![The Midgard Project](https://github.com/midgardproject/proposals/raw/master/Visual%20Guidelines/midgard_black.png)
 
 The logo of The Midgard Project is a simplified version of the [logo we've used for Midgard CMS](http://en.wikipedia.org/wiki/File:Midgard_logo.png) since the Ragnaroek days.
 
@@ -40,7 +40,7 @@ The logo of The Midgard Project is a simplified version of the [logo we've used 
 
 Each product of the Midgard Project will have its own logo, modeled on the original logo of the project itself.
 
-![Product logos](midgard_products_black.png)
+![Product logos](https://github.com/midgardproject/proposals/raw/master/Visual%20Guidelines/midgard_products_black.png)
 
 From left to right: Midgard Create, Midgard MVC, Midgard Daemon, Midgard Content Repository.
 
