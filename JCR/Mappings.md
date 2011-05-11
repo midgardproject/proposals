@@ -15,6 +15,16 @@ In Midgard2 to enable a single main tree, we will add a new `midgard_node` type 
 
 In Midgard1 we can use either `midgard_page` or `midgard_topic` for this purpose.
 
+The main node type can map to `nt:folder`.
+
+### Unstructured content
+
+It is very common in JCR implementations to use the `nt:unstructured` node type for basic content:
+
+> The JCR node type nt:unstructured is designed to accept any properties, so you can dump at will strings, dates or even binaries into such a node. This node type is very useful to get started with coding an application when you do not know what the end result should look like.
+
+We need a MgdSchema type that can be a child of objects of any other type that maps to `nt:unstructured`.
+
 ### Unfiled content
 
 Types that do not map into the main tree can be accessed via path `/jcr:system/jcr:unfiled/<guid>`.
