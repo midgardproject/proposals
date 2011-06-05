@@ -34,6 +34,12 @@ Each product of the Midgard Project will have its own logo, modeled on the origi
 
 From left to right: Midgard Create, Midgard MVC, Midgard Daemon, Midgard Content Repository.
 
+### Product logos with text
+
+A product logo may also be accompanied by the name of the product. The text should be in Cantarell font, and sized vertically in the same way as the _M_ in the logo itself.
+
+![Midgard Create](https://github.com/midgardproject/proposals/raw/master/Visual%20Guidelines/midgard_create.png)
+
 ## Fonts
 
 For product names and headlines on Midgard-branded materials, the [Cantarell](http://abattis.org/cantarell/) font is used. Cantarell is available under the [Open Font License](http://scripts.sil.org/OFL) from [GNOME git repository](http://git.gnome.org/browse/cantarell-fonts/plain/ttf).
