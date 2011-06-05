@@ -67,7 +67,7 @@
     <flowRoot
        xml:space="preserve"
        id="flowRoot3219"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-size:64px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Cantarell;-inkscape-font-specification:Cantarell;font-stretch:normal;font-variant:normal;text-anchor:start;text-align:start;writing-mode:lr"
        transform="translate(-16,0)"
        inkscape:export-xdpi="146.57001"
        inkscape:export-ydpi="146.57001"><flowRegion
@@ -76,7 +76,8 @@
            width="268.57144"
            height="85"
            x="375"
-           y="400.93362" /></flowRegion><flowPara
+           y="400.93362"
+           style="-inkscape-font-specification:Cantarell;font-family:Cantarell;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;font-size:64px;text-anchor:start;text-align:start;writing-mode:lr;line-height:125%" /></flowRegion><flowPara
          id="flowPara3225"
-         style="font-size:64px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Cantarell;-inkscape-font-specification:Cantarell">Create</flowPara></flowRoot>  </g>
+         style="font-size:64px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr;text-anchor:start;font-family:Cantarell;-inkscape-font-specification:Cantarell">Create</flowPara></flowRoot>  </g>
 </svg>
