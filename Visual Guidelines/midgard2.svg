@@ -14,7 +14,10 @@
    id="svg3352"
    version="1.1"
    inkscape:version="0.48.2 r9819"
-   sodipodi:docname="New document 10">
+   sodipodi:docname="midgard2.svg"
+   inkscape:export-filename="/home/bergie/Projects/proposals/Visual Guidelines/midgard2.png"
+   inkscape:export-xdpi="134.12003"
+   inkscape:export-ydpi="134.12003">
   <defs
      id="defs3354" />
   <sodipodi:namedview
@@ -77,15 +80,15 @@
     <flowRoot
        xml:space="preserve"
        id="flowRoot3372"
-       style="font-size:64px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Cantarell;-inkscape-font-specification:Cantarell;font-stretch:normal;font-variant:normal;text-anchor:start;text-align:start;writing-mode:lr"
-       transform="translate(-4.2426407,34.526912)"><flowRegion
+       style="font-size:64px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Cantarell;-inkscape-font-specification:Cantarell"
+       transform="translate(7.0710675,35.819805)"><flowRegion
          id="flowRegion3374"><rect
            id="rect3376"
            width="390.32294"
            height="140.71425"
            x="291.328"
            y="256.1908"
-           style="-inkscape-font-specification:Cantarell;font-family:Cantarell;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;font-size:64px;text-anchor:start;text-align:start;writing-mode:lr;line-height:125%" /></flowRegion><flowPara
+           style="font-size:64px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Cantarell;-inkscape-font-specification:Cantarell" /></flowRegion><flowPara
          id="flowPara3378"
-         style="font-size:64px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr;text-anchor:start;font-family:Cantarell;-inkscape-font-specification:Cantarell">Midgard2</flowPara></flowRoot>  </g>
+         style="font-size:64px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Cantarell;-inkscape-font-specification:Cantarell">Midgard2</flowPara></flowRoot>  </g>
 </svg>
